@@ -51,6 +51,14 @@ submitLocation(map.getCenter());
 
 $('#welcomeModal').modal();
 
+$('#welcomeModal').on('hidden.bs.modal', function () {
+  map.locate();
+})
+
+map.on('locationfound', function(e) {
+  map.panTo(e.latlng);
+});
+
 // Hiring smart people
 if (typeof console !== 'undefined' && typeof console.log === 'function' && !window.test) {
     console.log('\r\n%c                     *      .--.\r\n%c                           \/ \/  `\r\n%c          +               | |\r\n%c                 \'         \\ \\__,\r\n%c             *          +   \'--\'  *\r\n%c                 +   \/\\\r\n%c    +              .\'  \'.   *\r\n%c           *      \/======\\      +\r\n%c                 ;:.  _   ;\r\n%c                 |:. (_)  |\r\n%c                 |:.  _   |\r\n%c       +         |:. (_)  |          *\r\n%c                 ;:.      ;\r\n%c               .\' \\:.    \/ `.\r\n%c              \/ .-\'\':._.\'`-. \\\r\n%c              |\/    \/||\\    \\|\r\n%c            _..--\"\"\"````\"\"\"--.._\r\n%c      _.-\'``                    ``\'-._\r\n%c    -\'         %cAnjinglah maneh%c        \'-\r\n%c',
