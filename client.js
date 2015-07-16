@@ -77,7 +77,8 @@ socket.on('drivers', function(data) {
           height: 100
         }
       });
-      newMarker.bindPopup('<h3 class="popup-header">' + data[i].driverName + '</h3>' + data[i].driverNoTelp + '<br>' + data[i].driverTypeName);
+
+      newMarker.bindPopup('<h3 class="popup-header">' + data[i].driverName + '</h3><p class="popup-text">' + data[i].driverNoTelp + '</p><p class="popup-text">' + data[i].driverTypeName + '</p>');
       newMarker.addTo(map);
       newMarker.data = data[i];
       markers.push(newMarker);
@@ -112,7 +113,8 @@ socket.on('drivers', function(data) {
           height: 100
         }
       });
-      newMarker.bindPopup('<h3 class="popup-header">' + data[i].driverName + '</h3>' + data[i].driverNoTelp + '<br>' + data[i].driverTypeName);
+
+      newMarker.bindPopup('<h3 class="popup-header">' + data[i].driverName + '</h3><p class="popup-text">' + data[i].driverNoTelp + '</p><p class="popup-text">' + data[i].driverTypeName + '</p>');
       newMarker.addTo(map);
       newMarker.data = data[i];
       markers.push(newMarker);

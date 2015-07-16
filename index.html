@@ -1,46 +1,63 @@
 <html>
+
 <head>
   <title>Bekti JEKMaps</title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-  <meta property="og:title" content="Bekti JEKMaps"/>
-  <meta property="og:site_name" content="Bekti JEKMaps"/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:image" content="http://jekmaps.bekti.io/logo.png"/>
-  <meta property="og:url" content="http://jekmaps.bekti.io"/>
-  <meta property="og:description" content="Bekti JEKMaps allows you to find GO-JEK drivers around a certain area."/>
+  <meta property="og:title" content="Bekti JEKMaps" />
+  <meta property="og:site_name" content="Bekti JEKMaps" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://jekmaps.bekti.io/logo.png" />
+  <meta property="og:url" content="http://jekmaps.bekti.io" />
+  <meta property="og:description" content="Bekti JEKMaps allows you to find GO-JEK drivers around a certain area." />
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
   <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
   <link rel="stylesheet" href="https://cdn.rawgit.com/CliffCloud/Leaflet.EasyButton/f3f3136bda3937aa813c80a1a6c8c921c6df06ed/src/easy-button.css" />
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <style type="text/css">
-  body { margin:0; padding:0; }
-#map { position:absolute; top:0; bottom:0; width:100%; }
-h3.popup-header {
-  margin: 0;
-}
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+
+    p.popup-text {
+      margin: 0;
+      font-size: 12px;
+    }
   </style>
 </head>
+
 <body oncontextmenu="return false;">
   <div id='map'></div>
 
   <div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="welcomeModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="welcomeModalLabel">Welcome to Bekti JEKMaps</h4>
-      </div>
-      <div class="modal-body">
-        <p>This application allows you to find GO-JEK drivers around a certain area.</p>
-        <p>You can use the search button on the left to enter your area/city (e.g. Bandung or Jakarta). You will need to zoom the map to get a better view of the drivers.</p>
-        <p><strong>DISCLAIMER: THIS APP IS NOT AFFILIATED IN ANY WAY WITH GO-JEK. USE IT AT YOUR OWN RISK. THE APP IS PROVIDED AS-IS WITHOUT ANY GUARANTEE.</strong></p>
-      </div>
-      <div class="modal-footer">
-        <div style="float:left;line-height: 34px;">Copyright &copy; 2015 <a href="http://bekti.io">Bekti I/O</a></div>
-        <div style="float:right"><button type="button" class="btn btn-success" data-dismiss="modal">I Agree</button></div>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="welcomeModalLabel">Welcome to Bekti JEKMaps</h4>
+        </div>
+        <div class="modal-body">
+          <p>This application allows you to find GO-JEK drivers around a certain area.</p>
+          <p>You can use the search button on the left to enter your area/city (e.g. Bandung or Jakarta). You will need to zoom the map to get a better view of the drivers.</p>
+          <p>
+            <strong>DISCLAIMER: THIS APP IS NOT AFFILIATED IN ANY WAY WITH GO-JEK. USE IT AT YOUR OWN RISK. THE APP IS PROVIDED AS-IS WITHOUT ANY GUARANTEE.</strong>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <div style="float:left;line-height: 34px;">Copyright &copy; 2015 <a href="http://bekti.io">Bekti I/O</a></div>
+          <div style="float:right">
+            <button type="button" class="btn btn-success" data-dismiss="modal">I Agree</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
@@ -49,4 +66,5 @@ h3.popup-header {
   <script src="https://cdn.rawgit.com/CliffCloud/Leaflet.EasyButton/f3f3136bda3937aa813c80a1a6c8c921c6df06ed/src/easy-button.js"></script>
   <script src="/bundle.js"></script>
 </body>
+
 </html>
