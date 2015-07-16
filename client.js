@@ -72,7 +72,10 @@ socket.on('drivers', function(data) {
 
 submitLocation(map.getCenter());
 
-$('#welcomeModal').modal();
+$('#welcomeModal').modal({
+  backdrop: 'static',
+  keyboard: false
+});
 
 $('#welcomeModal').on('hidden.bs.modal', function () {
   map.locate();
