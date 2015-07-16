@@ -5,6 +5,10 @@ var io = require('socket.io')(http);
 var path = require('path');
 var request = require('request');
 
+var dbURL = process.env.COUCHDB_URL || 'http://localhost:5984';
+var nano = require('nano')(dbURL);
+var db = nano.use('jekmaps');
+
 var onlineUsers = 0;
 var userCount = {};
 
@@ -61,6 +65,35 @@ function fetchGojekDrivers(data, socket) {
     };
   });
 }
+
+function syncUserStats() {
+  db.get('stats', { revs_info: true }, function(err, body) {
+    if (!err) {
+      var payload = {
+        onlineUsers: onlineUsers,
+        userCount: userCount,
+        _rev: body._rev
+      };
+
+      db.insert(payload, 'stats', function(err, body) {});
+    }
+  });
+}
+
+function fetchInitialUserStats() {
+  db.get('stats', { revs_info: true }, function(err, body) {
+    if (!err) {
+      console.log(body.onlineUsers);
+      console.log(body.userCount);
+
+      onlineUsers = body.onlineUsers == undefined ? 0 : body.onlineUsers;
+      userCount = body.userCount == undefined ? {} : body.userCount;
+    }
+  });
+}
+
+fetchInitialUserStats();
+setInterval(syncUserStats, 60000);
 
 http.listen(5000, function() {
   console.log('listening on *:5000');

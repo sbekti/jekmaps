@@ -1,5 +1,5 @@
-var bouncemarker = require('./bouncemarker');
-var bouncemarker = require('./usermarker');
+var bouncemarker = require('./lib/bouncemarker');
+var bouncemarker = require('./lib/usermarker');
 var socket = io();
 
 var position;
@@ -160,7 +160,7 @@ map.on('locationfound', function(e) {
     map.panTo(position);
     firstLocationLock = false;
   }
-  
+
   userMarker.setLatLng(position);
 });
 
