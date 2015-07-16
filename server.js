@@ -70,7 +70,6 @@ function syncUserStats() {
   db.get('stats', { revs_info: true }, function(err, body) {
     if (!err) {
       var payload = {
-        onlineUsers: onlineUsers,
         userCount: userCount,
         _rev: body._rev
       };
@@ -83,10 +82,6 @@ function syncUserStats() {
 function fetchInitialUserStats() {
   db.get('stats', { revs_info: true }, function(err, body) {
     if (!err) {
-      console.log(body.onlineUsers);
-      console.log(body.userCount);
-
-      onlineUsers = body.onlineUsers == undefined ? 0 : body.onlineUsers;
       userCount = body.userCount == undefined ? {} : body.userCount;
     }
   });
