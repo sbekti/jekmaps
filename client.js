@@ -1,5 +1,7 @@
+var bouncemarker = require('./bouncemarker');
 var socket = io();
 
+var position;
 var markers = [];
 
 function submitLocation(location) {
@@ -13,9 +15,28 @@ function submitLocation(location) {
 
 L.mapbox.accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6IlhHVkZmaW8ifQ.hAMX5hSW-QnTeRCMAy9A8Q';
 
-var map = L.mapbox.map('map', 'mapbox.osm-bright')
+var map = L.mapbox.map('map', null, {attributionControl: false})
   .setView([-6.886831823908739, 107.61399149894714], 16)
   .addControl(L.mapbox.geocoderControl('mapbox.places'));
+
+L.control.layers({
+  'Mapbox OSM Bright 2': L.mapbox.tileLayer('mapbox.osm-bright').addTo(map),
+  'Mapbox Streets': L.mapbox.tileLayer('mapbox.streets'),
+  'Mapbox Streets Satellite': L.mapbox.tileLayer('mapbox.streets-satellite'),
+  'Mapbox Satellite': L.mapbox.tileLayer('mapbox.satellite'),
+  'Mapbox Light': L.mapbox.tileLayer('mapbox.light'),
+  'Mapbox Dark': L.mapbox.tileLayer('mapbox.dark'),
+  'Mapbox Pirates': L.mapbox.tileLayer('mapbox.pirates'),
+  'Mapbox Comic': L.mapbox.tileLayer('mapbox.comic'),
+  'Mapbox Wheatpaste': L.mapbox.tileLayer('mapbox.wheatpaste'),
+  'OpenStreetMap': L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png'),
+  'Stamen Toner': L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png'),
+  'Stamen Watercolor': L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.png')
+}).addTo(map);
+
+L.easyButton('fa-location-arrow', function(btn, map){
+  map.setView(position, 16);
+}).addTo(map);
 
 map.on('moveend', function(e) {
   submitLocation(map.getCenter());
@@ -39,7 +60,9 @@ socket.on('drivers', function(data) {
           'marker-size': 'large',
           'marker-symbol': 'scooter',
           'marker-color': '#009900'
-      })
+      }),
+      bounceOnAdd: true,
+      bounceOnAddOptions: {duration: 500, height: 100}
     });
     marker.bindPopup('<h3 class="popup-header">' + data[i].driverName + '</h3><br>' + data[i].driverNoTelp + '<br>' + data[i].driverTypeName);
     marker.addTo(map);
@@ -56,6 +79,7 @@ $('#welcomeModal').on('hidden.bs.modal', function () {
 })
 
 map.on('locationfound', function(e) {
+  position = e.latlng;
   map.panTo(e.latlng);
 });
 
