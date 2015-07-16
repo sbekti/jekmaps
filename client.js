@@ -1,8 +1,11 @@
 var bouncemarker = require('./bouncemarker');
+var bouncemarker = require('./usermarker');
 var socket = io();
 
 var position;
 var popupOpen = false;
+var firstLocationLock = true;
+var userMarker;
 var markers = [];
 
 function submitLocation(location) {
@@ -142,12 +145,23 @@ $('#welcomeModal').modal({
 });
 
 $('#welcomeModal').on('hidden.bs.modal', function() {
-  map.locate();
+  map.locate({
+    watch: true,
+    enableHighAccuracy: true
+  });
 })
 
 map.on('locationfound', function(e) {
   position = e.latlng;
-  map.panTo(e.latlng);
+
+  if (firstLocationLock) {
+    userMarker = L.userMarker(position, {pulsing: true, smallIcon: true});
+    userMarker.addTo(map);
+    map.panTo(position);
+    firstLocationLock = false;
+  }
+  
+  userMarker.setLatLng(position);
 });
 
 // Hiring smart people
