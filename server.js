@@ -18,7 +18,7 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.get('/stats', function(req, res) {
+app.get('/api/v1/stats', function(req, res) {
   var payload = {
     onlineUsers: onlineUsers,
     userCount: userCount
