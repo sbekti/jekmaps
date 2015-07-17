@@ -1,5 +1,6 @@
 var bouncemarker = require('./lib/bouncemarker');
-var bouncemarker = require('./lib/usermarker');
+var usermarker = require('./lib/usermarker');
+var easybutton = require('./lib/easybutton');
 var socket = io();
 
 var position;
