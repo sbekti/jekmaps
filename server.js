@@ -88,7 +88,7 @@ function fetchInitialUserStats() {
 }
 
 fetchInitialUserStats();
-setInterval(syncUserStats, 60000);
+setInterval(syncUserStats, 15 * 60 * 1000);
 
 http.listen(5000, function() {
   console.log('listening on *:5000');
