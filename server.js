@@ -10,7 +10,7 @@ var nano = require('nano')(dbURL);
 var db = nano.use('jekmaps');
 
 var onlineUsers = 0;
-var userCount = {};
+var visitorCount = {};
 
 app.use(express.static('public'));
 
@@ -20,8 +20,8 @@ app.get('/', function(req, res) {
 
 app.get('/api/v1/stats', function(req, res) {
   var payload = {
-    onlineUsers: onlineUsers,
-    userCount: userCount
+    online_users: onlineUsers,
+    visitor_count: visitorCount
   };
 
   res.json(payload);
@@ -31,12 +31,12 @@ io.on('connection', function(socket) {
   ++onlineUsers;
 
   var today = new Date().toJSON().slice(0,10);
-  var todayData = userCount[today];
+  var todayData = visitorCount[today];
 
   if (todayData != undefined) {
-    userCount[today].count++;
+    visitorCount[today].count++;
   } else {
-    userCount[today] = {
+    visitorCount[today] = {
       count: 1
     };
   }
@@ -70,7 +70,7 @@ function syncUserStats() {
   db.get('stats', { revs_info: true }, function(err, body) {
     if (!err) {
       var payload = {
-        userCount: userCount,
+        visitor_count: visitorCount,
         _rev: body._rev
       };
 
@@ -82,7 +82,7 @@ function syncUserStats() {
 function fetchInitialUserStats() {
   db.get('stats', { revs_info: true }, function(err, body) {
     if (!err) {
-      userCount = body.userCount == undefined ? {} : body.userCount;
+      visitorCount = body.visitor_count == undefined ? {} : body.visitor_count;
     }
   });
 }
