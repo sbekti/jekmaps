@@ -82,7 +82,7 @@ socket.on('drivers', function(data) {
         }
       });
 
-      newMarker.bindPopup('<h3 class="popup-header">' + data[i].driverName + '</h3><p class="popup-text">' + data[i].driverNoTelp + '</p><p class="popup-text">' + data[i].driverTypeName + '</p>');
+      //newMarker.bindPopup('<h3 class="popup-header">' + data[i].driverName + '</h3><p class="popup-text">' + data[i].driverNoTelp + '</p><p class="popup-text">' + data[i].driverTypeName + '</p>');
       newMarker.addTo(map);
       newMarker.data = data[i];
       markers.push(newMarker);
