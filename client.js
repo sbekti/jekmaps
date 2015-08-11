@@ -130,7 +130,7 @@ function findMarker(data, markers) {
   var result = null;
 
   markers.forEach(function(marker, index, object) {
-    if ((marker.data.driverName == data.driverName) && (marker.data.driverNoTelp == data.driverNoTelp)) {
+    if (marker.data.driverLatLong == data.driverLatLong) {
       result = marker;
     }
   });
